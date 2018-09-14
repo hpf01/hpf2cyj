@@ -136,9 +136,60 @@ window.onload = function() {
 		}	
 	}
 </script>
+
+<style type="text/css">
+  .title{
+  color:#FFFFFF;
+  background:red;
+  width:623px;
+  height:50px;
+  }
+  
+  .li{
+       list-style-type: none;/* 去掉li前的点 */
+	   float: left;/*将li设置成做浮动，变为联动*/
+
+  }
+  
+  a{
+			display: block;/*将a变成块状*/
+			width: 100px;/*设置块的宽度*/
+			height: 50px;/*设置块的长度*/
+			font-family: Microsoft Yahei;
+			line-height: 50px;/*设置字体在块中的高度*/
+			background-color: #2f4f4f;
+			margin: 0px 0px;/*块里的高宽通过margin设置*/
+			color: #fff;
+			text-align: center;/*字体居中*/
+			text-decoration: none;/*去掉下划线*/
+			font-size: 15px;
+		}
+		a:hover{
+			background-color: #2f6f4f;
+		}
+
+</style>
+
 </head>
 <body>
-英雄浏览
+<div align="center">
+   <div class="title">英雄浏览</div>
+</div>
+
+
+<div class="li">
+		<ul class="daohagn">
+			<li><a href="">全部</a></li>
+			<li><a href="">射手</a></li>
+			<li><a href="">法师</a></li>
+			<li><a href="">刺客</a></li>
+			<li><a href="">战士</a></li>
+			<li><a href="">坦克</a></li>
+			<li><a href="">辅助</a></li>
+		</ul>
+	</div>
+
+
 <ul id="ul1">
 	<li><img src="images/1.jpg" width="100" height="100" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp刘邦</li>
 	<li><img src="images/2.jpg" width="100" height="100" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp韩信</li>
