@@ -1,221 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
+         <!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>PC机器人聊天界面</title>
-<style>
-.box{
-	width: 100%;
-	height: 500px;
-	position:absolute;
-	top:0;
-}
-#content{
-	width: 98%;
-	height: 500px;
-	margin-right:1%;
-	margin-left:1%;
-}
-form{
-	width: 100%;
-	height:60px;
-	line-height:40px;
-	border-top:1px solid #ccc; 
-	position:absolute;
-	bottom:0;
-	left:0;
-}
-#content form img{
-	border:1px solid #ccc;
-	border-radius:7px;
-	padding:2px; 
-	cursor:pointer;
-	margin:5px 0 0 5px;
-	float:left;
-	width:40px;
-	height:40px;
-}
-#content form input[type='text']{
-	width:80%;
-	height:40px;
-	line-height:27px;
-	border-radius:7px; 
-	border:1px solid #ccc;
-	float:left;
-	margin-left:5px; 
-	margin-top:5px; 
-	outline:none;
-	padding:0 5px; 
-}
-#content form input[type='button']{
-	width:12%;
-	height: 40px;
-	border-radius:5px; 
-	background:#fff;
-	border:none;
-	margin-left:1%; 
-	cursor:pointer;
-	font-size:27px;
-	margin-top:5px;
-}
-
-.info_box{
-	width: 100%;
-	height:440px;
-	overflow-y:auto;
-}
-.info_box::-webkit-scrollbar {display:none}
-.info_box div{
-	margin:0 0 5px;
-	position:relative;
-}
-.info_box .info_r{
-	
-}
-.info_box .info_l{
-
-}
-.info_box .info_l img{
-	position:absolute;
-	left:0;
-	top:0;
-}
-.info_box .info_r img{
-	position:absolute;
-	right:0;
-	top:0;
-}
-.info_box .info_l span{margin-left: 60px;margin-top:16px;}
-.info_box .info_r span{margin-left:28%;margin-top:16px;}
-
-
-.info_box span{
-	width: 66%;
-	height: auto;
-	font-size:14px;
-	background:#ddd;
-	border-radius: 10px;
-	padding:8px;  
-	color:#333;
-	display: block;
-	position:relative;
-	top:0;
-}
-
-
-.info_box .info_l img{
-	float:left;
-	width:50px;
-    height:50px;
-}
-
-
-
-.info_r img{
-	float:right;
-	width:50px;
-    height:50px;
-}
-
-
-
-</style>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>小琴robot</title>
+	<link rel="stylesheet" href="./index.css">
 </head>
 <body>
-<div class="box">
-	<div id="content">
-		<div class="info_box">
-		
-			 <div class="info_r">
-					<img src="img/2.jpg" class='pic_r'>
-					<span class='infor'>Python是一种跨平台的计算机程序设计语言。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越来越多被用于独立的、大型项目的开发。</span>
-				</div> 	
-			 <div class="info_l">
-				<img src="img/1.jpg" class='pic_l'>
-				<span class='infoo'>在您开始之前，在你的计算机将需要Python，但您可能不需要下载它。首先检查(在命令行窗口输入python)有没有安装Python!如果你看到了一个Python解释器的响应，那么就能在它的显示窗口中得到一个版本号。通常较新的版本都可以做到Python的向前兼容。</span>
-			</div>	 
-			
+	<div class="wrapper">
+		 
+		<p class="name">八岁的聊天机器人</p>
+		<div class="content-box">
+			  <div class="robot">
+                <div class="avitor"></div>
+                <div class="text">我替我的小主人hpf问你的哦，想我了吗(●'◡'●)</div>
+            </div>
 		</div>
-		<form action="">
-			<img src="img/1.jpg" id='pic'>
-			<input type="text" placeholder='尽情畅聊吧' id='inp'>
-			<input type="button" value='发送' id='send'>
-		</form>
+		<div class="input-box">
+			<input type="text" name="" id="inp" placeholder="你想说点啥~">
+			<button type="" id="submit">发送</button>
+		</div>
 	</div>
-</div>
+	<script src="./ajax.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
+ *{
+	padding:0;
+	margin:0;
+}
+
+::-webkit-scrollbar{
+	display: none;
+}
+html,body{
+	height:100%;
+}
+.wrapper{
+	width:600px;
+	height:100%;
+	margin:0 auto;
+	background-color:rgba(100,112,154,0.2);
+	border-radius: 10px;
+}
+p{
+	text-align: center;
+	background-color:rgba(226,190,170,0.8);
+	height:40px;
+	line-height: 40px;
+	font-size: 20px;
+	color:#fff;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 
 
-<script>
-var send =document.getElementById('send');
-var pic =document.getElementById('pic');
-var txt =document.getElementById('inp');
-var info_box = document.getElementsByClassName('info_box')[0];
 
-var onoff=true;
-pic.onclick=function(){
-	if(onoff){
-		pic.src='img/2.jpg';
-		onoff=false;
-	}
-	else{
-		pic.src='img/1.jpg';
-		onoff=true;
-	}
-};
+}
 
-send.onclick=function(){
-	if(txt.value===''){
-		alert('请输入内容');
-	}
+.content-box{
+	overflow-y:auto;
+	width:100%;
+	height: calc(100% - 90px)
+}
+
+.avitor{
+	 /*float:left;*/
+
+	width:30px;
+	height:30px;
+	border-radius: 50%;
+	/*border: 1px solid black;*/
+	display: inline-block;
 	
-	else{
-	    
-		var nDiv = document.createElement('div');
-		var spans = document.createElement('span');
-		var imgs = document.createElement('img');
-		var sTxt = document.createTextNode(txt.value);
-		var info_box = document.getElementsByClassName('info_box')[0];
-		spans.appendChild(sTxt);
-		nDiv.appendChild(spans);
-		nDiv.appendChild(imgs);
-		// nDiv.style.display='block';
-		info_box.insertBefore(nDiv,info_box.lastChild);
-		spans.className='infor';
-	    nDiv.className='info_r';
-	    imgs.src='img/2.jpg';
-		
-		var nDiv = document.createElement('div');
-		var spans = document.createElement('span');
-		var imgs = document.createElement('img');
-		var sTxt = document.createTextNode("你说啥？");
-		var info_box = document.getElementsByClassName('info_box')[0];
-		spans.appendChild(sTxt);
-		nDiv.appendChild(spans);
-		nDiv.appendChild(imgs);
-		// nDiv.style.display='block';
-		info_box.insertBefore(nDiv,info_box.lastChild);
-	    spans.className='infol';
-			nDiv.className='info_l';
-			imgs.src='img/1.jpg';
-/*
-		if(onoff==true){
-			spans.className='infor';
-			nDiv.className='info_r';
-			imgs.src='img/2.png';
-		}
-		if(onoff==false){
-			spans.className='infol';
-			nDiv.className='info_l';
-			imgs.src='img/1.png';
-		}
-*/
-	}
-	txt.value='';
+
+}
+.mine{
+	float:right;
+	margin:10px;
+	width: calc(100% - 10px);
+	 
+}
+.robot{
+	float:left;
+	margin:10px;
+	width: calc(100% - 10px);
+	 
+
+	 
+
+}
+
+.mine .avitor{
+	float:right;
+
+	background-image: url("./4.png");
+}
+.mine .text{
+	 float:right;
+	background-color: rgba(112,182,163,0.5);
+	margin-right: 15px;
+	position: relative;
+
+}
+.mine .text::after{
+	content:"";
+	width:0px;
+	height:0px;
+	display: inline-block;
+	position: absolute;
+	right:-20px;
+	top:9px;
+	border-width:20px;
+	border:10px solid transparent;
+	border-left-color: rgba(112,182,163,0.5);
+	 
+}
+.robot .text{
+	background-color: rgba(81,173,93,0.5);
+	margin-left: 15px;
+	position: relative;
+
+	
+}
+.robot .text::after{
+	content:"";
+	width:0px;
+	height:0px;
+	display: inline-block;
+	border:10px solid transparent;
+	border-right-color:rgba(81,173,93,0.5);
+	position: absolute;
+	left:-20px;
+	top:9px; 
+}
+
+.robot .avitor{
+	background-image: url("./2.png");
+}
+.mine .avitor,
+.robot .avitor{
+	background-size: 100% 100%;
+	vertical-align:top;
 }
 
 
-</script>
-	
-</body>
-</html>
+.text{
+	max-width:250px;
+	border:1px solid #ddd;
+	display: inline-block;
+	padding:10px;
+	border-radius: 10px;
+	 
+
+}
+.input-box{
+	height:50px;
+	width:100%;
+	background-color:rgba(191,155,255,0.5);
+	line-height: 50px;
+	text-align: center;
+
+}
+#inp{
+	padding-left: 4px;
+	font-size: 16px;
+	width:60%;
+	height:60%;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	/*margin:10px auto;*/
+
+}
+
+#submit{
+	border-radius: 5px;
+	font-size: 16px;
+	padding:3px 12px;
+	margin:0 5px;
+	background-color:#FFFFFFFF;
+	outline: none;
+	border:none;
+	font-weight:bolder;
+	color:##404040FF;
+	box-shadow: 0px 1px 3px 1px #404040FF;
+	transition: all 0.5 linear;
+}
+
+input::placeholder{
+	color:#A0A0A0FF;
+	font-size: 13px;
+
+}
+#submit:hover{
+	transform:scale(1.1);
+	box-shadow: 0px 3px 5px 1px #404040FF;
+
+
+}
+
+
+
