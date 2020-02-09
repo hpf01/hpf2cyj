@@ -33,10 +33,10 @@ function addDom(who, val) {
   //var paras = "key= 72a5507158ff4ca5aa05043d4c24ce55&info="+sayContent;
 
 function getData(val) {
-        var paras = "key=85b5595ba24948de8d2a7152c6201292&info="+val;
+        var paras = "key=2bb7948c6bd04a608de3c318306c4541&info="+val;
          ajax('POST',"http://www.tuling123.com/openapi/api",success, paras, true)
           function success(data){
-            console.log(data)
+            //console.log(data)
           da=eval("("+data+")")
           addDom('robot', da.text);
           }
