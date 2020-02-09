@@ -1,14 +1,28 @@
+         <!DOCTYPE html>
 <html>
-
- <head>
-
-         <meta charset="UTF-8">
-
- </head>
-
- <body>
-
-问:<input type="text" id="robot" onkeypress="showHint(this.value)"/> 
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>小琴robot</title>
+	<link rel="stylesheet" href="./index.css">
+</head>
+<body>
+	<div class="wrapper">
+		 
+		<p class="name">小琴robot</p>
+		<div class="content-box">
+			  <div class="robot">
+                <div class="avitor"></div>
+                <div class="text">想我了吗(●'◡'●)</div>
+            </div>
+		</div>
+		<div class="input-box">
+			<input type="text" name="" id="inp" placeholder="你想说点啥~">
+			<button type="" id="submit">发送</button>
+		</div>
+	</div>
+ 
+ 问:<input type="text" id="robot" onkeypress="showHint(this.value)"/> 
 
 <input type="button" value="发送" onclick="Send(document.getElementById('robot').value)"/> 当键盘敲击回车时发送
 
@@ -60,7 +74,7 @@ function Send(str)
 
                             }
 
-                     var url="http://www.tuling123.com/openapi/api?key=0bfc834afd4b4bb3b7d11bbcec0a1460&info=你好";
+                     var url="http://www.tuling123.com/openapi/api?key=2bb7948c6bd04a608de3c318306c4541&info=你好";
 
                      url=url+"&info="+str;
 
@@ -139,7 +153,16 @@ return xmlHttp;
 }
 
 </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+	<script src="./ajax.js"></script>
+    
+</body>
+</html>
 
- </body>
-
- </html>
