@@ -119,21 +119,6 @@ var ajax = {
 
     }
 
-    .imgLayout{
-
-        width: 100%;
-
-        height: 100%;
-
-        margin: 0 auto;
-
-        background: url("/images/star.jpg");
-
-        /*简单粗暴解决高度塌陷问题（记得复习其他方法） */
-
-        padding:1px;
-
-    }
 
     .outer{
 
@@ -161,14 +146,14 @@ var ajax = {
 
         width: 100%;
 
-        height: 480px;
+        height: 100%;
 
-        /*设置滚动 这里吕某经常用// 符号注释，使得下面一行代码失效*/
+        /*设置滚动 这里某经常用// 符号注释，使得下面一行代码失效*/
 
         overflow: auto;
 
         margin-bottom: 10px;
-
+background: url(/images/star.jpg);
     }
 
     .outer input{
@@ -246,7 +231,7 @@ var ajax = {
 </style>
 
 <body>
-
+<center>您的专属聊天机器人1号</center>
 <div class="imgLayout">
 
     <div class="outer">
@@ -275,7 +260,7 @@ var ajax = {
 
     <input type="text">
 
-    <button class="send_btn">Send</button>
+    <button class="send_btn">发送</button>
 
     </div>
 
