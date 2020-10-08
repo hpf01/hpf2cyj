@@ -1,432 +1,290 @@
-
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="utf-8" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>八岁的聊天机器人</title>
-
-    <script>
-   
-//一个ajax对象
-
-var ajax = {
-
-    get:function (url,successCallBack,failCallBack) {
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET",url,true);
-
-        xhr.onreadystatechange = function () {
-
-            //xhr.readyState 的值有0 1 2 3 4
-
-            if(xhr.readyState == 4){
-
-                //判断xhr.status的响应码
-
-                if(xhr.status == 200 || xhr.status == 304){
-
-                    //判断successCallBack 是否传递了一个函数
-
-                    if(typeof successCallBack == "function"){
-
-                        //将xhr.responseText的信息交给用户回调函数处理
-
-                        successCallBack(xhr.responseText,xhr);
-
-                    }else if(typeof failCallBack == "function"){
-
-                        //将xhr.responseText的信息交给用户回调函数处理
-
-                        failCallBack(xhr.responseText,xhr);
-
-                    }
-
-                }
-
- 
-
-            }};
-
-        xhr.send(null);
-
-    },
-
-    post:function (url,data,successCallBack,failCallBack) {
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("POST",url,true);
-
-        xhr.onreadystatechange = function () {
-
-            //xhr.readyState 的值有0 1 2 3 4
-
-            if(xhr.readyState == 4){
-
-                //判断xhr.status的响应码
-
-                if(xhr.status == 200 || xhr.status == 304){
-
-                    //判断successCallBack 是否传递了一个函数
-
-                    if(typeof successCallBack == "function"){
-
-                        //将xhr.responseText的信息交给用户回调函数处理
-
-                        successCallBack(xhr.responseText,xhr);
-
-                    }else if(typeof failCallBack == "function"){
-
-                        //将xhr.responseText的信息交给用户回调函数处理
-
-                        failCallBack(xhr.responseText,xhr);
-
-                    }
-
-                }
-
- 
-
-            }};
-
-        //设置请求头,这行代码,一定要在open之后, send之前调用.
-
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.send(data);
-
-    }
-
-};
-
-</script>
-
+    <title>Vue基础</title>
 </head>
-
-<style>
-
-    *{
-
-        padding: 0;
-
-        margin: 0;
-
-    }
-
-
-    .outer{
-
-        box-sizing: border-box;
-
-        width: 600px;
-
-        height: 600px;
-
-        border-radius: 20px;
-
-        background-color: whitesmoke;
-
-        border: 2px solid white;
-
-        margin: 20px auto;
-
-        padding: 5px;
-
-    }
-
-    .chatContent{
-
-        box-sizing: border-box;
-
-        width: 100%;
-
-        height: 100%;
-
-        /*设置滚动 这里某经常用// 符号注释，使得下面一行代码失效*/
-        overflow: auto;
-
-        margin-bottom: 10px;
-      background: url(/images/back.jpg) no-repeat center center;
-    }
-
-    .outer input{
-
-        width: 580px;
-
-        height: 45px;
-
-        font-size: 30px;
-
-        line-height: 45px;
-
-    }
-
-    .outer button{
-
-        width: 580px;
-
-        height: 45px;
-
-        font-size: 30px;
-
-        line-height: 45px;
-
-        background-color: cornflowerblue;
-
-        border-radius: 20px;
-
-        margin-top: 5px;
-
-        margin-bottom: 5px;
-
-        outline: cornflowerblue;
-
-    }
-
-    .outer .chatContent div{
-
-        width: 550px;
-
-        /*让内容撑开高度，p可能有高度不同*/
-
-        /*height: 55px;*/
-
-        display: none;
-
-    }
-
-    .outer .chatContent .msg_mine{
-
-        text-align: right;
-
-        float: right;
-
-        margin-right: 5px;
-
-    }
-
-    .outer .chatContent .msg_robot{
-
-        clear: both;
-
-    }
-
-    .chatContent img{
-
-        width: 40px;
-
-        height: 40px;
-
-        border-radius: 50%;
-
-    }
-
-</style>
-
 <body>
-<p>Tips：陈八岁，你好，我是你的聊天机器人<br>若移动端的页面出现放大的情况，则缩小至可以正常使用即可。</p>
-<div class="imgLayout">
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 官网提供的在线axios地址 -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <div class="outer">
-
-    <div class="chatContent">
-
-    <div class="msg_robot">
-
-        <img src="/images/robot.jpg" alt="robot">
-
-        <p></p>
-
-    </div>
-
-    <div class="msg_mine">
-
-        <img src="/images/myself.jpg" alt="robot">
-
-        <p></p>
-
- 
-
-    </div>
-
-    </div>
-
-    <input type="text">
-
-    <button class="send_btn">发送</button>
-
-    </div>
-
+<!--
+<div id="banner">
+    <button @click="pre" v-show="index!=0">点击切换上一张</button>
+    <button @click="next" v-show="index!=imgArry.length-1">点击切换下一张</button>
+    <img :src="imgArry[index]" alt="" height="500px" weight="200px">
 </div>
 
- 
+<script>
+   var input_num = new Vue({
+       el:"#banner",
+       data:{
+           imgArry:[
+               "images/02.jpg",
+               "images/03.jpg",
+               "images/04.jpg",
+               "images/05.jpg",
+               "images/06.jpg",
+               "images/07.jpg",
+               "images/08.jpg"
+           ],
+           index:0
+       },
+       methods:{
+          pre:function () {
+                  this.index&#45;&#45;;
+          },
+           next:function () {
+                   this.index++;
+           }
+       }
+   })
+</script>
+-->
+<!--<div id="app">
+    <ul>
+        <li v-for="(item,index) in arr" v-bind:title="item">
+            {{index+1}}黑马程序员校区：{{item}}
+        </li>
+    </ul>
+    <h2 v-for="item in vegetables" v-bind:title="item.name">
+        {{item.name}}
+    </h2>
+    <input type="button" value="添加数据" @click="add">
+    <input type="button" value="删除数据" v-on:click="remove">
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            arr:["北京","上海","广州"],
+            vegetables:[
+                {name:"番茄炒蛋"},
+                {name:"辣椒炒肉"}
+            ]
+        },
+        methods:{
+            add:function () {
+                this.vegetables.push({name:"花菜"});
+            },
+            remove:function () {
+                this.vegetables.shift();
+            }
+        }
+    })
+</script>-->
+<!--<div id="app">
+    <input type="button" value="点击" @click="doIt(666,'老铁')">
+    <input type="text" @keyup.enter="speak">
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        methods:{
+            doIt:function (p1,p2) {
+                alert(p2);
+                alert(p1);
+            },
+            speak:function () {
+                alert("吃了吗")
+            }
+        }
+    })
+</script>-->
+<!--<div id="app">
+    <input type="text" v-model="message">
+
+    <input type="button" @click="print_message" value="打印数据">
+    <h2>{{message}}</h2>
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            message:"黑马程序员"
+        },
+        methods:{
+            print_message:function () {
+                alert(this.message);
+            }
+        }
+    })
+</script>-->
+<!--
+<div id="app" v-if="show">
+    <ul>
+        <li v-for="(item,index) in something">
+            {{index+1}}{{"|"}}{{item}}
+            <input type="button" value="删除" @click="del(index)">
+        </li>
+    </ul>
+    <input type="text" v-model="message" @keyup.enter="add" placeholder="请输入任务">
+    <input type="button" value="删除所有" @click="delAll">
+    <input type="button" value="隐藏" @click="clear">
+    <p v-show="something.length!=0">
+    "{{something.length}}"条记录值
+    </p>
+</div>
+<div id="show">
+    <input type="button" value="显示" @click="display">
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            something:[],
+            message:"",
+            show:true
+        },
+        methods:{
+            add:function () {
+                if(this.message!="")
+                    this.something.push(this.message);
+                this.message="";
+            },
+            del:function (index) {
+                this.something.splice(index,1);
+            },
+            delAll:function () {
+                this.something=[];
+            },
+
+            clear:function () {
+                this.show=false;
+            }
+        }
+    });
+    var app1 =new Vue({
+        el:"#show",
+        data:{
+            show:false
+        },
+        methods:{
+            display:function () {
+                app.show=true;
+            },
+        }
+    })
+</script>
+-->
+<!--<div id="app">
+    <input type="button" value="获取笑话" v-on:click="getJoke">
+    <p style="color:red">
+        {{joke}}
+    </p>
+</div>
 
 <script>
-
-    var input = document.querySelector(".outer input");
-
-    var send = document.querySelector(".send_btn");
-
-    var msg_robot = document.querySelector(".outer .chatContent .msg_robot");
-
-    var msg_mine = document.querySelector(".outer .chatContent .msg_mine");
-
-    var chatContent = document.querySelector(".chatContent");
-
- 
-
-    /*机器人聊天函数
-
-    * */
-
-    function chat() {
-
-        var sayContent = input.value;
-
-        var paras = "key=347b39ee228b4b109dae7270cc08d3c8&userid=Fengmaybe&info="+sayContent;
-
-        ajax.post("http://www.tuling123.com/openapi/api",paras,function (content,xhr) {
-
-            //克隆mine的节点，深度克隆
-
-            var newNodeMine=msg_mine.cloneNode(true);
-
-            newNodeMine.lastElementChild.innerHTML=sayContent;
-
-            newNodeMine.style.display="block";
-
-            chatContent.appendChild(newNodeMine);
-
-            //设置自动滚动文本聊天信息
-
-            autoScroll(chatContent);
-
-            //只要提交了，清空input栏的值
-
-            input.value="";
-
-            console.log(content);
-
-            //post响应的数据是一个json对象，所以要转成js对象
-
-            var obj = JSON.parse(content);
-
-            //判断响应回复的信息是哪种类型
-
-            msgRobot = obj.text;
-
-            //判断图片信息
-
-            if(obj.url){
-
-                msgRobot += "<a href='"+obj.url+"' target='_blank'>点我看图片.</a>";
-
+    var app = new Vue({
+        el:"#app",
+        data:{
+            joke:"很好看的笑话"
+        },
+        methods:{
+            getJoke:function () {
+                var that = this;
+                axios.get("https://autumnfish.cn/api/joke").then(function (response) {
+                    console.log(response.data);
+                    //console.log(this.joke);
+                    that.joke = response.data;
+                },function (err) {  })
             }
-
- 
-
-            //判断菜谱信息
-
-            if(obj.list && obj.code=="308000"){
-
-                msgRobot +=" ①菜谱名字："+obj.list[0].name+" ②菜谱原料："+obj.list[0].info+" 做饭链接："+"<a href='"+obj.list[0].detailurl+"' target='_blank'>点我看怎么做？</a>";
-
-            }
-
- 
-
-            //判断新闻信息
-
-            if(obj.list && obj.code=="302000"){
-
-                msgRobot +=" ①文章标题："+obj.list[0].article+" ②文章来源："+obj.list[0].source+" 做饭链接："+"<a href='"+obj.list[0].detailurl+"' target='_blank'>点我看新闻.</a>";
-
-            }
-
-            //克隆新的节点robot的
-
-            var newNodeRobot=msg_robot.cloneNode(true);
-
-            newNodeRobot.lastElementChild.innerHTML=msgRobot;
-
-            newNodeRobot.style.display="block";
-
-            chatContent.appendChild(newNodeRobot);
-
-            //设置自动滚动文本聊天信息
-
-            autoScroll(chatContent);
-
-        });
-
-    }
-
- 
-
- 
-
-    /*让指定的元素自动滚动
-
-    * */
-
-    function autoScroll(parentEle) {
-
-        setTimeout(function step() {
-
-            //注意scrollTop不是CSS的属性是js的属性,是没有单位的
-
-            var top = parentEle.scrollTop;
-
-            parentEle.scrollTop += top +4;
-
-            //设置定时器关闭的条件
-
-            if(top == parentEle.scrollTop) return;
-
-            setTimeout(step,20);
-
-        },0)
-
-    }
-
- 
-
-    /*为send按钮设置单机响应函数,注意这里是一个函数，只需要把函数名给他就行
-
-    * */
-
-    send.onclick = chat;
-
- 
-
-    /*设置键盘响应函数，点击enter就相当于button的单机
-
-    *这里是要执行的，所以要chat();
-
-    * */
-
-    document.οnkeydοwn=function (ev) {
-
-        if(ev.keyCode == 13){
-
-            chat();
-
         }
 
-    }
+    })
+</script>-->
+<!--<div id="app">
+    <input type="text" v-model="city" class="input_text" placeholder="请输入查询的天气" @keyup.enter="searchWeather">
+   <button class="input_sub" @click="searchWeather">
+    搜索
+   </button>
 
- 
+    <ul class="weather_list">
+        <li v-for="item in weatherList">
+            {{item.date}}
+            {{item.fengli}}
+            {{item.fengxiang}}
+            {{item.high}}
+            {{item.low}}
+        </li>
+    </ul>
+    <a href="javascript:;" @click="changeCity('北京')">北京</a>
+    <a href="javascript:;" @click="changeCity('上海')">上海</a>
+    <a href="javascript:;" @click="changeCity('深圳')">深圳</a>
+    <a href="javascript:;" @click="changeCity('武汉')">武汉</a>
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            city:'',
+            weatherList:[]
+        },
+        methods:{
+            searchWeather:function () {
+               // console.log('天气查询');
+                // console.log(this.city);
+                //调用接口查询城市天气情况
+                var that = this;
+                axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+this.city)
+                    .then(function (response) {
+                        console.log(response.data.data.forecast);
+                       that.weatherList = response.data.data.forecast;
+                    })
+                    .catch(function (err) {  })
+            },
+            changeCity:function (city) {
+                this.city = city;
+                this.searchWeather();
+            }
+        }
+    })
+</script>-->
 
- 
 
+
+<div id="app">
+    <input type="text" v-model="name" placeholder="请输入歌手或者歌曲名" @keyup.enter="searchAll">
+    <button @click="searchAll">搜索</button><br>
+    <audio ref="audio" v-bind:src="musicUrl" controls autoplay loop></audio>
+    <ul>
+        <li v-for="item in songs">
+           {{item.name}}
+            <a href="javascript:;" @click="playMusic(item.id)">播放</a>
+        </li>
+    </ul>
+</div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            name:"",
+            songs:[],
+            musicUrl:""
+        },
+        methods:{
+            searchAll:function () {
+                var that = this;
+                axios.get("https://autumnfish.cn/search?keywords="+this.name)
+                    .then(function (response) {
+                        console.log(response.data.result.songs);
+                        that.songs = response.data.result.songs;
+                    })
+                    .catch(function (err) {  })
+            },
+            playMusic:function (musicId) {
+                var that = this;
+                axios.get("https://autumnfish.cn/song/url?id="+musicId)
+                    .then(function (response) {
+                         console.log(response);
+                         that.musicUrl = response.data.data[0].url;
+                }).catch(function (err) {  })
+            }
+        }
+    })
 </script>
 
 </body>
-
 </html>
