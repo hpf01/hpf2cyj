@@ -17,7 +17,7 @@ dd {
 }
 
 .play_wrap {
-  width: 800px;
+  width: 400px;
   height: 544px;
   position: fixed;
   left: 50%;
@@ -249,7 +249,7 @@ dd {
   border-bottom-right-radius: 4px;
 }
 .myaudio {
-  width: 800px;
+  width: 400px;
   height: 40px;
   margin-top: 5px;
   outline: none;
