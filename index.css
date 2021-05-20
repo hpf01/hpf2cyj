@@ -1,388 +1,236 @@
-body,
-ul,
-dl,
-dd {
-  margin: 0px;
-  padding: 0px;
+/* 清除浏览器默认边距，
+使边框和内边距的值包含在元素的width和height内 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.body {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  min-height:100%;
-  background: url("images/bg1.jpg") no-repeat;
-  background-size: 100% 100%;
+/* 使用flex布局，让内容垂直和水平居中 */
+
+section {
+    /* 相对定位 */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* linear-gradient() 函数用于创建一个表示两种或多种颜色线性渐变的图片 */
+    background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
 }
 
-.play_wrap {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  /* background-color: #f9f9f9; */
+/* 背景颜色 */
+
+section .color {
+    /* 绝对定位 */
+    position: absolute;
+    /* 使用filter(滤镜) 属性，给图像设置高斯模糊*/
+    filter: blur(200px);
 }
 
-.search_bar {
-  height: 60px;
-  background-color: #1eacda;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 11;
+/* :nth-child(n) 选择器匹配父元素中的第 n 个子元素 */
+
+section .color:nth-child(1) {
+    top: -350px;
+    width: 600px;
+    height: 600px;
+    background: #ff359b;
 }
 
-.search_bar img {
-  margin-left: 23px;
+section .color:nth-child(2) {
+    bottom: -150px;
+    left: 100px;
+    width: 500px;
+    height: 500px;
+    background: #fffd87;
 }
 
-.search_bar input {
-  margin-right: 23px;
-  width: 296px;
-  height: 34px;
-  border-radius: 17px;
-  border: 0px;
-  background: url("images/zoom.png") 265px center no-repeat
-  rgba(255, 255, 255, 0.45);
-  text-indent: 15px;
-  outline: none;
+section .color:nth-child(3) {
+    bottom: 50px;
+    right: 100px;
+    width: 500px;
+    height: 500px;
+    background: #e9fffa;
 }
 
-.center_con {
-  height: 435px;
-  background-color: rgba(255, 255, 255, 0.5);
-  display: flex;
-  position: relative;
+.box {
+    position: relative;
 }
 
-.song_wrapper {
-  width: 200px;
-  height: 435px;
-  box-sizing: border-box;
-  padding: 10px;
-  list-style: none;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
+/* 背景圆样式 */
+
+.box .circle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    /* backdrop-filter属性为一个元素后面区域添加模糊效果 */
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    /* 使用filter(滤镜) 属性，改变颜色。
+    hue-rotate(deg)  给图像应用色相旋转
+    calc() 函数用于动态计算长度值
+    var() 函数调用自定义的CSS属性值x*/
+    filter: hue-rotate(calc(var(--x) * 70deg));
+    /* 调用动画animate，需要10s完成动画，
+    linear表示动画从头到尾的速度是相同的，
+    infinite指定动画应该循环播放无限次*/
+    animation: animate 10s linear infinite;
+    /* 动态计算动画延迟几秒播放 */
+    animation-delay: calc(var(--x) * -1s);
 }
 
-.song_stretch {
-  width: 600px;
+/* 背景圆动画 */
+
+@keyframes animate {
+    0%, 100%{
+        transform: translateY(-50px);
+    }
+    50% {
+        transform: translateY(50px);
+    }
 }
 
-.song_list {
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100%;
-}
-.song_list::-webkit-scrollbar {
-  display: none;
+.box .circle:nth-child(1) {
+    top: -50px;
+    right: -60px;
+    width: 100px;
+    height: 100px;
 }
 
-.song_list li {
-  font-size: 12px;
-  color: #333;
-  height: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 580px;
-  padding-left: 10px;
+.box .circle:nth-child(2) {
+    top: 150px;
+    left: -100px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
 }
 
-.song_list li:nth-child(odd) {
-  background-color: rgba(240, 240, 240, 0.3);
+.box .circle:nth-child(3) {
+    bottom: 50px;
+    right: -60px;
+    width: 80px;
+    height: 80px;
+    z-index: 2;
 }
 
-.song_list li a {
-  display: block;
-  width: 17px;
-  height: 17px;
-  background-image: url("images/play.png");
-  background-size: 100%;
-  margin-right: 5px;
-  box-sizing: border-box;
+.box .circle:nth-child(4) {
+    bottom: -80px;
+    left: 100px;
+    width: 60px;
+    height: 60px;
 }
 
-.song_list li b {
-  font-weight: normal;
-  width: 122px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.box .circle:nth-child(5) {
+    top: -80px;
+    left: 140px;
+    width: 60px;
+    height: 60px;
 }
 
-.song_stretch .song_list li b {
-  width: 200px;
+/* 登录框样式 */
+
+.container {
+    position: relative;
+    width: 400px;
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.song_stretch .song_list li em {
-  width: 150px;
+.form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
 }
 
-.song_list li span {
-  width: 23px;
-  height: 17px;
-  margin-right: 50px;
-}
-.song_list li span i {
-  display: block;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  background: url("images/table.png") left -48px no-repeat;
+/* 登录标题样式 */
+
+.form h2 {
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
 }
 
-.song_list li em,
-.song_list li i {
-  font-style: normal;
-  width: 100px;
+/* 登录标题的下划线样式 */
+
+.form h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0px;
+    height: 3px;
+    background: #fff;
+    transition: 0.5s;
 }
 
-.player_con {
-  width: 400px;
-  height: 435px;
-  position: absolute;
-  left: 200px;
-  top: 0px;
+.form h2:hover:before {
+    width: 53px;
 }
 
-.player_con2 {
-  width: 400px;
-  height: 435px;
-  position: absolute;
-  left: 200px;
-  top: 0px;
+.form .inputBox {
+    width: 100%;
+    margin-top: 20px;
 }
 
-.player_con2 video {
-  position: absolute;
-  left: 20px;
-  top: 30px;
-  width: 355px;
-  height: 265px;
+/* 输入框样式 */
+
+.form .inputBox input {
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.disc {
-  position: absolute;
-  left: 73px;
-  top: 60px;
-  z-index: 9;
-}
-.cover {
-  position: absolute;
-  left: 125px;
-  top: 112px;
-  width: 150px;
-  height: 150px;
-  border-radius: 75px;
-  z-index: 8;
-}
-.comment_wrapper {
-  width: 180px;
-  height: 435px;
-  list-style: none;
-  position: absolute;
-  left: 600px;
-  top: 0px;
-  padding: 25px 10px;
-}
-.comment_wrapper .title {
-  position: absolute;
-  top: 0;
-  margin-top: 10px;
-}
-.comment_wrapper .comment_list {
-  overflow: auto;
-  height: 410px;
-}
-.comment_wrapper .comment_list::-webkit-scrollbar {
-  display: none;
-}
-.comment_wrapper dl {
-  padding-top: 10px;
-  padding-left: 55px;
-  position: relative;
-  margin-bottom: 20px;
+.form .inputBox input::placeholder {
+    color: #fff;
 }
 
-.comment_wrapper dt {
-  position: absolute;
-  left: 4px;
-  top: 10px;
+/* 登录按钮样式 */
+
+.form .inputBox input[type="submit"] {
+    background: #fff;
+    color: #666;
+    max-width: 100px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.comment_wrapper dt img {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+.forget {
+    margin-top: 6px;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
-.comment_wrapper dd {
-  font-size: 12px;
-}
-
-.comment_wrapper .name {
-  font-weight: bold;
-  color: #333;
-  padding-top: 5px;
-}
-
-.comment_wrapper .detail {
-  color: #666;
-  margin-top: 5px;
-  line-height: 18px;
-}
-.audio_con {
-  height: 50px;
-  background-color: #f1f3f4;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.myaudio {
-  width: 400px;
-  height: 40px;
-  margin-top: 5px;
-  outline: none;
-  background-color: #f1f3f4;
-}
-/* 旋转的动画 */
-@keyframes Rotate {
-  from {
-    transform: rotateZ(0);
-  }
-  to {
-    transform: rotateZ(360deg);
-  }
-}
-/* 旋转的类名 */
-.autoRotate {
-  animation-name: Rotate;
-  animation-iteration-count: infinite;
-  animation-play-state: paused;
-  animation-timing-function: linear;
-  animation-duration: 5s;
-}
-/* 是否正在播放 */
-.player_con.playing .disc,
-.player_con.playing .cover {
-  animation-play-state: running;
-}
-
-.play_bar {
-  position: absolute;
-  left: 200px;
-  top: -10px;
-  z-index: 10;
-  transform: rotate(-25deg);
-  transform-origin: 12px 12px;
-  transition: 1s;
-}
-/* 播放杆 转回去 */
-.player_con.playing .play_bar {
-  transform: rotate(0);
-}
-/* 搜索历史列表 */
-.search_history {
-  position: absolute;
-  width: 296px;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.3);
-  list-style: none;
-  right: 23px;
-  top: 50px;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  border-radius: 17px;
-}
-.search_history li {
-  line-height: 24px;
-  font-size: 12px;
-  cursor: pointer;
-}
-.switch_btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  cursor: pointer;
-}
-.right_line {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.video_con video {
-  position: fixed;
-  width: 800px;
-  height: 546px;
-  left: 50%;
-  top: 50%;
-  margin-top: -273px;
-  transform: translateX(-50%);
-  z-index: 990;
-}
-.video_con .mask {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 980;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-.video_con .shutoff {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  background: url("images/shutoff.png") no-repeat;
-  left: 50%;
-  margin-left: 400px;
-  margin-top: -273px;
-  top: 50%;
-  z-index: 995;
-}
-
-/* PC或中大型笔记本设备 desktop */
-@media all and (min-width: 1201px) {
-  .title-desktop{
-    display: block !important;
-  }
-  .container {
-    width: 1100px;
-  }
-}
-
-/* 中小型笔记本或大平板 laptop */
-
-@media all and (min-width: 980px) and (max-width: 1200px) {
-  .title-laptop{
-    display: block !important;
-  }
-  .container {
-    width: 920px;
-  }
-}
-
-/* 中型平板或小型笔记本 tablet */
-@media all and (min-width: 768px) and (max-width: 979px) {
-  .title-tablet{
-    display: block !important;
-  }
-  .container {
-    width: 720px;
-  }
-}
-/* 手机或小平板 phone */
-@media all and (max-width: 767px) {
-  .title-phone{
-    display: block !important;
-  }
-  .container {
-    width: 90%;
-  }
+.forget a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
 }
