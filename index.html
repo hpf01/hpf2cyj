@@ -1,425 +1,66 @@
 <!DOCTYPE html>
-<html lang="utf-8" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="index.css">
+
     <title>小陈同学的MusicPlayer</title>
-   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <link rel="stylesheet" href="./index.css">
+    <script>
+        content = "520的仪式感，就是给千里之外的Ta，她想要的...";
+        i = 0;
+        function show(){
+            str  = content.substr(0,i);
+            txt.innerHTML = str ;
+            i++;
+            //if (i>content.length) i =0;
+            setTimeout("show()",200); }
+    </script>
 </head>
-<body>
-<!-- 开发环境版本，包含了有帮助的命令行警告 -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!-- 官网提供的在线axios地址 -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!--
-<div id="banner">
-    <button @click="pre" v-show="index!=0">点击切换上一张</button>
-    <button @click="next" v-show="index!=imgArry.length-1">点击切换下一张</button>
-    <img :src="imgArry[index]" alt="" height="500px" weight="200px">
-</div>
-
-<script>
-   var input_num = new Vue({
-       el:"#banner",
-       data:{
-           imgArry:[
-               "images/02.jpg",
-               "images/03.jpg",
-               "images/04.jpg",
-               "images/05.jpg",
-               "images/06.jpg",
-               "images/07.jpg",
-               "images/08.jpg"
-           ],
-           index:0
-       },
-       methods:{
-          pre:function () {
-                  this.index&#45;&#45;;
-          },
-           next:function () {
-                   this.index++;
-           }
-       }
-   })
+<script language=javascript>
+    function toopen(){
+        if(document.getElementById("password").value=="20215201314"){
+            document.forms[0].action="player.html";
+            return true;
+        }else{
+            alert("专属码不正确！")
+            return false;
+        }
+    }
 </script>
--->
-<!--<div id="app">
-    <ul>
-        <li v-for="(item,index) in arr" v-bind:title="item">
-            {{index+1}}黑马程序员校区：{{item}}
-        </li>
-    </ul>
-    <h2 v-for="item in vegetables" v-bind:title="item.name">
-        {{item.name}}
-    </h2>
-    <input type="button" value="添加数据" @click="add">
-    <input type="button" value="删除数据" v-on:click="remove">
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            arr:["北京","上海","广州"],
-            vegetables:[
-                {name:"番茄炒蛋"},
-                {name:"辣椒炒肉"}
-            ]
-        },
-        methods:{
-            add:function () {
-                this.vegetables.push({name:"花菜"});
-            },
-            remove:function () {
-                this.vegetables.shift();
-            }
-        }
-    })
-</script>-->
-<!--<div id="app">
-    <input type="button" value="点击" @click="doIt(666,'老铁')">
-    <input type="text" @keyup.enter="speak">
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        methods:{
-            doIt:function (p1,p2) {
-                alert(p2);
-                alert(p1);
-            },
-            speak:function () {
-                alert("吃了吗")
-            }
-        }
-    })
-</script>-->
-<!--<div id="app">
-    <input type="text" v-model="message">
-
-    <input type="button" @click="print_message" value="打印数据">
-    <h2>{{message}}</h2>
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            message:"黑马程序员"
-        },
-        methods:{
-            print_message:function () {
-                alert(this.message);
-            }
-        }
-    })
-</script>-->
-<!--
-<div id="app" v-if="show">
-    <ul>
-        <li v-for="(item,index) in something">
-            {{index+1}}{{"|"}}{{item}}
-            <input type="button" value="删除" @click="del(index)">
-        </li>
-    </ul>
-    <input type="text" v-model="message" @keyup.enter="add" placeholder="请输入任务">
-    <input type="button" value="删除所有" @click="delAll">
-    <input type="button" value="隐藏" @click="clear">
-    <p v-show="something.length!=0">
-    "{{something.length}}"条记录值
-    </p>
-</div>
-<div id="show">
-    <input type="button" value="显示" @click="display">
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            something:[],
-            message:"",
-            show:true
-        },
-        methods:{
-            add:function () {
-                if(this.message!="")
-                    this.something.push(this.message);
-                this.message="";
-            },
-            del:function (index) {
-                this.something.splice(index,1);
-            },
-            delAll:function () {
-                this.something=[];
-            },
-
-            clear:function () {
-                this.show=false;
-            }
-        }
-    });
-    var app1 =new Vue({
-        el:"#show",
-        data:{
-            show:false
-        },
-        methods:{
-            display:function () {
-                app.show=true;
-            },
-        }
-    })
-</script>
--->
-<!--<div id="app">
-    <input type="button" value="获取笑话" v-on:click="getJoke">
-    <p style="color:red">
-        {{joke}}
-    </p>
-</div>
-
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            joke:"很好看的笑话"
-        },
-        methods:{
-            getJoke:function () {
-                var that = this;
-                axios.get("https://autumnfish.cn/api/joke").then(function (response) {
-                    console.log(response.data);
-                    //console.log(this.joke);
-                    that.joke = response.data;
-                },function (err) {  })
-            }
-        }
-
-    })
-</script>-->
-<!--<div id="app">
-    <input type="text" v-model="city" class="input_text" placeholder="请输入查询的天气" @keyup.enter="searchWeather">
-   <button class="input_sub" @click="searchWeather">
-    搜索
-   </button>
-
-    <ul class="weather_list">
-        <li v-for="item in weatherList">
-            {{item.date}}
-            {{item.fengli}}
-            {{item.fengxiang}}
-            {{item.high}}
-            {{item.low}}
-        </li>
-    </ul>
-    <a href="javascript:;" @click="changeCity('北京')">北京</a>
-    <a href="javascript:;" @click="changeCity('上海')">上海</a>
-    <a href="javascript:;" @click="changeCity('深圳')">深圳</a>
-    <a href="javascript:;" @click="changeCity('武汉')">武汉</a>
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            city:'',
-            weatherList:[]
-        },
-        methods:{
-            searchWeather:function () {
-               // console.log('天气查询');
-                // console.log(this.city);
-                //调用接口查询城市天气情况
-                var that = this;
-                axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+this.city)
-                    .then(function (response) {
-                        console.log(response.data.data.forecast);
-                       that.weatherList = response.data.data.forecast;
-                    })
-                    .catch(function (err) {  })
-            },
-            changeCity:function (city) {
-                this.city = city;
-                this.searchWeather();
-            }
-        }
-    })
-</script>-->
-
-<!--<div id="app">
-    <input type="text" v-model="name" placeholder="请输入歌手或者歌曲名" @keyup.enter="searchAll">
-    <button @click="searchAll">搜索</button><br>
-    <audio ref="audio" v-bind:src="musicUrl" controls autoplay loop></audio>
-    <ul>
-        <li v-for="item in songs">
-           {{item.name}}
-            <a href="javascript:;" @click="playMusic(item.id)">播放</a>
-        </li>
-    </ul>
-</div>
-<script>
-    var app = new Vue({
-        el:"#app",
-        data:{
-            name:"",
-            songs:[],
-            musicUrl:""
-        },
-        methods:{
-            searchAll:function () {
-                var that = this;
-                axios.get("https://autumnfish.cn/search?keywords="+this.name)
-                    .then(function (response) {
-                        console.log(response.data.result.songs);
-                        that.songs = response.data.result.songs;
-                    })
-                    .catch(function (err) {  })
-            },
-            playMusic:function (musicId) {
-                var that = this;
-                axios.get("https://autumnfish.cn/song/url?id="+musicId)
-                    .then(function (response) {
-                         console.log(response);
-                         that.musicUrl = response.data.data[0].url;
-                }).catch(function (err) {  })
-            }
-        }
-    })
-</script>-->
-<div class="body">
-    <!-- 播放器主体区域 -->
-    <div class="play_wrap" id="player">
-        <div class="search_bar">
-            <!-- <img src="images/player_title.png" alt="" />-->
-             <!-- 搜索歌曲 -->
-            <input type="text" autocomplete="off" v-model="query" @keyup.enter="searchMusic" />
-        </div>
-        <div class="center_con">
-            <!-- 搜索歌曲列表 -->
-            <div class='song_wrapper'>
-                <ul class="song_list">
-                    <li v-for="item in musicList">
-                        <a href="javascript:;" @click="playMusic(item.id)"></a>
-                        <b>{{item.name}}</b>
-                        <span v-if="item.mvid!=0" @click="playMV(item.mvid)"><i></i></span>
-                    </li>
-                </ul>
-                <img src="images/line.png" class="switch_btn" alt="">
+<body onLoad="show()">
+<section>
+    <!-- 背景颜色 -->
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+        <!-- 背景圆 -->
+        <div class="circle" style="--x:0"></div>
+        <div class="circle" style="--x:1"></div>
+        <div class="circle" style="--x:2"></div>
+        <div class="circle" style="--x:3"></div>
+        <div class="circle" style="--x:4"></div>
+        <!-- 登录框 -->
+        <div class="container">
+            <div class="form">
+                <form>
+                    <div class="inputBox">
+                        <input type="password" id="password" name="password" class="loginInput" placeholder="    ❤小陈同学的专属验证码❤">
+                    </div>
+                    <div class="inputBox">
+                        <center>
+                            <input type="submit" value="Let's Go" class="loginBtn" onclick="return toopen();">
+                        </center>
+                    </div>
+                </form>
             </div>
-            <!-- 歌曲信息容器 -->
-            <div class="player_con" :class="{playing:isPlaying}">
-            </div>
-
         </div>
-        <div class="audio_con">
-            <audio ref='audio' @play="play" @pause="pause" :src="musicUrl" controls autoplay loop class="myaudio"></audio>
-        </div>
-        <div class="video_con" v-show="isShow" style="display: none;">
-            <video :src="mvUrl"  controls="controls"></video>
-            <div class="mask" @click="hide"></div>
-        </div>
+        <div id="txt" align="center" style="color: antiquewhite"></div>
     </div>
-</div>
-
-
-<script>
-    var app = new Vue({
-        el: "#player",
-        data: {
-            // 查询关键字
-            query: "",
-            // 歌曲数组
-            musicList: [],
-            // 歌曲地址
-            musicUrl: "",
-            // 歌曲封面
-            musicCover: "",
-            // 歌曲评论
-            hotComments: [],
-            // 动画播放状态
-            isPlaying: false,
-            // 遮罩层的显示状态
-            isShow: false,
-            // mv地址
-            mvUrl: ""
-        },
-        methods: {
-            // 歌曲搜索
-            searchMusic: function() {
-                var that = this;
-                axios.get("https://autumnfish.cn/search?keywords=" + this.query).then(
-                    function(response) {
-                        // console.log(response);
-                        that.musicList = response.data.result.songs;
-                        console.log(response.data.result.songs);
-                    },
-                    function(err) {}
-                );
-            },
-            // 歌曲播放
-            playMusic: function(musicId) {
-                //   console.log(musicId);
-                var that = this;
-                // 获取歌曲地址
-                axios.get("https://autumnfish.cn/song/url?id=" + musicId).then(
-                    function(response) {
-                        // console.log(response);
-                        // console.log(response.data.data[0].url);
-                        that.musicUrl = response.data.data[0].url;
-                    },
-                    function(err) {}
-                );
-
-                // 歌曲详情获取
-                axios.get("https://autumnfish.cn/song/detail?ids=" + musicId).then(
-                    function(response) {
-                        // console.log(response);
-                        // console.log(response.data.songs[0].al.picUrl);
-                        that.musicCover = response.data.songs[0].al.picUrl;
-                    },
-                    function(err) {}
-                );
-
-                // 歌曲评论获取
-                axios.get("https://autumnfish.cn/comment/hot?type=0&id=" + musicId).then(
-                    function(response) {
-                        // console.log(response);
-                        // console.log(response.data.hotComments);
-                        that.hotComments = response.data.hotComments;
-                    },
-                    function(err) {}
-                );
-            },
-            // 歌曲播放
-            play: function() {
-                // console.log("play");
-                this.isPlaying = true;
-            },
-            // 歌曲暂停
-            pause: function() {
-                // console.log("pause");
-                this.isPlaying = false;
-            },
-            // 播放mv
-            playMV: function(mvid) {
-                var that = this;
-
-                axios.get("https://autumnfish.cn/mv/url?id=" + mvid).then(
-                    function(response) {
-                        // console.log(response);
-                        console.log(response.data.data.url);
-                        that.isShow = true;
-                        that.mvUrl = response.data.data.url;
-                    },
-                    function(err) {}
-                );
-            },
-            // 隐藏
-            hide: function() {
-                var that = this;
-                this.isShow = false;
-                that.mvUrl="";
-            }
-        }
-    });
-</script>
+</section>
 </body>
+
 </html>
